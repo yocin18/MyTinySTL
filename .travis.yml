@@ -6,9 +6,9 @@ cache:
     - node_modules
 # install:
 #     - npm install
-script:
-    - hexo clean
-    - hexo g
+# script:
+#     - hexo clean
+#     - hexo g
 
 after_script:
     - cd ./public

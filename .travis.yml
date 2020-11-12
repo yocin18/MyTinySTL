@@ -1,72 +1,29 @@
-language: cpp
+langue: nodejs
 
-# ubuntu 14.04 version
-sudo: required
-dist: trusty
-
-matrix:
-  include:
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
-      env:
-        - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6']
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-7']
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-        
-    - os: osx
-      osx_image: xcode5
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        
-    - os: osx
-      osx_image: xcode6
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        
-    - os: osx
-      osx_image: xcode7
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        
-        
-before_script:
-  - eval "${MATRIX_EVAL}"
-  - $CXX --version
-  
+nodejs: stable
+cache:
+    directories:
+    - node_modules
+install:
+    -npm install
 script:
-  - mkdir build && cd ./build
-  - cmake ..
-  - make
-  - cd ../bin && ./stltest
-  
+    - hexo clean
+    - hexo g
+
+after_script:
+    - cd ./public
+    - git init
+    - git config user.name "yocin18"
+    - git config user.email "1931094340@qq.com"
+    - git add .
+    - git commit -m "代码是自动部署的"
+    - git push --force --quiet "https://${MyTinySTL}@${GH_REF}" master:gh-pages
+
 branches:
-  only:
-  - master
-  
-notifications:
-  email: false
+    only:
+        - master
+env:
+    golobal:
+        - GH_REF: https://github.com/yocin18/MyTinySTL.git
+      
+

@@ -1,29 +1,34 @@
+# langue: nodejs
+
+# nodejs: stable
+# cache:
+#     directories:
+#     - node_modules
+# # install:
+# #     - npm install
+# # script:
+# #     - hexo clean
+# #     - hexo g
+
+# after_script:
+#     - cd ./public
+#     - git init
+#     - git config user.name "yocin18"
+#     - git config user.email "1931094340@qq.com"
+#     - git add .
+#     - git commit -m "代码是自动部署的"
+#     - git push --force --quiet "https://${MyTinySTL}@${GH_REF}" master:gh-pages
+
+# branches:
+#     only:
+#         - master
+# env:
+#     golobal:
+#         - GH_REF: https://github.com/yocin18/MyTinySTL.git
+      
+
 langue: nodejs
 
-nodejs: stable
-cache:
-    directories:
-    - node_modules
-# install:
-#     - npm install
-# script:
-#     - hexo clean
-#     - hexo g
-
-after_script:
-    - cd ./public
-    - git init
-    - git config user.name "yocin18"
-    - git config user.email "1931094340@qq.com"
-    - git add .
-    - git commit -m "代码是自动部署的"
-    - git push --force --quiet "https://${MyTinySTL}@${GH_REF}" master:gh-pages
-
-branches:
-    only:
-        - master
-env:
-    golobal:
-        - GH_REF: https://github.com/yocin18/MyTinySTL.git
-      
+before_script:
+    - composer install
 
